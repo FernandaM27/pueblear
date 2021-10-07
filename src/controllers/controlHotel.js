@@ -19,7 +19,7 @@ const saveHotel = (request, response) => {
 };
 
 const getHotels = (request, response) => {
-    const hotels = hotel.find((err, activities) => {
+    const hotels = hotel.find((err, hotels) => {
         if (err) {
             response.status(400).send(err);
         } else {
@@ -29,11 +29,11 @@ const getHotels = (request, response) => {
 };
 
 const getHotel = (request, response) => {
-    const act = hotel.findById(request.params.id, (err, act) => {
+    const ht = hotel.findById(request.params.id, (err, ht) => {
         if (err) {
             response.status(400).send(err);
         } else {
-            response.status(200).send(act);
+            response.status(200).send(ht);
         }
     });
 };
@@ -49,11 +49,11 @@ const deleteHotel = (request, response) => {
 };
 
 const updateHotel = (request, response) => {
-    hotel.findByIdAndUpdate(request.params.id, request.body, (err, act) => {
+    hotel.findByIdAndUpdate(request.params.id, request.body, (err, htl) => {
         if (err) {
             response.status(400).send(err);
         } else {
-            response.status(200).send(act);
+            response.status(200).send(htl);
         }
     });
 };
