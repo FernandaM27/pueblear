@@ -61,4 +61,4 @@ module.exports.saveAttraction = saveAttraction;
 module.exports.getAttractions = getAttractions;
 module.exports.getAttraction = getAttraction;
 module.exports.deleteAttraction = deleteAttraction;
-module.exports.updateHotel = updateHotel;
+module.exports.updateAttraction = updateAttraction;

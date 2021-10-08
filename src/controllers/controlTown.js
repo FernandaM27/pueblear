@@ -1,7 +1,7 @@
 const { town } = require("../models/town");
 
 const saveTown = (request, response) => {
-  const { name, state, location, attractions, hotels, travels } = request.body;
+  const { name, state, location, attractions, hotels, travels , comments } = request.body;
   const twn = new town({
     name,
     state,
@@ -9,6 +9,7 @@ const saveTown = (request, response) => {
     attractions,
     hotels,
     travels,
+    comments
   });
 
   town.save((err) => {

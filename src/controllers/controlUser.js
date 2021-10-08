@@ -1,14 +1,15 @@
 const { user } = require('../models/user');
 
 const saveUser = (request, response) => {
-    const { name, age, location, travels } = request.body;
+    const { name, age, location, travels, password } = request.body;
+    console.log(request.body);
     const usr = new user({
         name,
         age,
         location,
         travels,
+        password,
     });
-
     usr.save((err) => {
         if (err) {
             response.status(400).send(err);

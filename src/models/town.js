@@ -9,6 +9,7 @@ const townSchema = new Schema(
         hotels: { type: Schema.Types.Array, required: true },
         attractions: { type: Schema.Types.Array, required: true },
         travels: { type: Schema.Types.Array, required: true },
+        comments: { type: Schema.Types.Array, required: true },
     },
     { collection: 'town', versionKey: false }
 );
