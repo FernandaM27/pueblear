@@ -1,3 +1,5 @@
-const URL = 'mongodb+srv://equipo1:sesamo@pueblar.vgngi.mongodb.net/pueblar';
+require('dotenv').config();
+
+const URL = process.env.URL;
 
 module.exports.URL = URL;
