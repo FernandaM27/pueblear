@@ -47,17 +47,23 @@ const deleteTransportation = (request, response) => {
 };
 
 const updateTransportation = (request, response) => {
-    transportation.findByIdAndUpdate(request.params.id, request.body, (err, trans) => {
-        if (err) {
-            response.status(400).send(err);
-        } else {
-            response.status(200).send(trans);
+    transportation.findByIdAndUpdate(
+        request.params.id,
+        request.body,
+        (err, trans) => {
+            if (err) {
+                response.status(400).send(err);
+            } else {
+                response.status(200).send(trans);
+            }
         }
-    });
+    );
 };
 
-module.exports.saveTransportation = saveTransportation;
-module.exports.getTransportations = getTransportations;
-module.exports.getTransportation = getTransportation;
-module.exports.deleteTransportation = deleteTransportation;
-module.exports.updateTransportation = updateTransportation;
+module.exports = {
+    updateTransportation,
+    deleteTransportation,
+    getTransportation,
+    getTransportations,
+    saveTransportation,
+};

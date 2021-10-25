@@ -59,8 +59,4 @@ const updateUser = (request, response) => {
     });
 };
 
-module.exports.saveUser = saveUser;
-module.exports.getUsers = getUsers;
-module.exports.getUser = getUser;
-module.exports.deleteUser = deleteUser;
-module.exports.updateUser = updateUser;
+module.exports = { saveUser, getUsers, getUser, deleteUser, updateUser };

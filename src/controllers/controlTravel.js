@@ -5,9 +5,9 @@ const saveTravel = (request, response) => {
     const trvl = new travel({
         date,
         price,
-        transportation
+        transportation,
     });
-    
+
     travel.save((err) => {
         if (err) {
             response.status(400).send(err);
@@ -57,8 +57,10 @@ const updateTravel = (request, response) => {
     });
 };
 
-module.exports.saveTravel = saveTravel;
-module.exports.getTravels = getTravels;
-module.exports.getTravel = getTravel;
-module.exports.deleteTravel = deleteTravel;
-module.exports.updateTravel = updateTravel;
+module.exports = {
+    saveTravel,
+    getTravels,
+    getTravel,
+    deleteTravel,
+    updateTravel,
+};

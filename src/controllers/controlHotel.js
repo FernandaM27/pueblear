@@ -58,8 +58,6 @@ const updateHotel = (request, response) => {
     });
 };
 
-module.exports.saveHotel = saveHotel;
-module.exports.getHotels = getHotels;
-module.exports.getHotel = getHotel;
-module.exports.deleteHotel = deleteHotel;
-module.exports.updateHotel = updateHotel;
+
+module.exports = {  saveHotel, getHotels, getHotel, deleteHotel, updateHotel };
+

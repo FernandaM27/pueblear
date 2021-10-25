@@ -4,9 +4,9 @@ const saveComment = (request, response) => {
     const { username, message } = request.body;
     const cmt = new comment({
         username,
-        message
+        message,
     });
-    
+
     cmt.save((err) => {
         if (err) {
             response.status(400).send(err);
@@ -56,8 +56,10 @@ const updateComment = (request, response) => {
     });
 };
 
-module.exports.saveComment = saveComment;
-module.exports.getComments = getComments;
-module.exports.getComment = getComment;
-module.exports.deleteComment = deleteComment;
-module.exports.updateComment = updateComment;
+module.exports = {
+    saveComment,
+    getComments,
+    getComment,
+    deleteComment,
+    updateComment,
+};

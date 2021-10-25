@@ -1,7 +1,7 @@
 const { attraction } = require('../models/attraction');
 
 const saveAttraction = (request, response) => {
-    const { ubication, name, description,  } = request.body;
+    const { ubication, name, description } = request.body;
     const attr = new attraction({
         ubication,
         name,
@@ -57,8 +57,10 @@ const updateAttraction = (request, response) => {
     });
 };
 
-module.exports.saveAttraction = saveAttraction;
-module.exports.getAttractions = getAttractions;
-module.exports.getAttraction = getAttraction;
-module.exports.deleteAttraction = deleteAttraction;
-module.exports.updateAttraction = updateAttraction;
+module.exports = {
+    saveAttraction,
+    getAttractions,
+    getAttraction,
+    deleteAttraction,
+    updateAttraction,
+};

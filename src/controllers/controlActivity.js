@@ -8,7 +8,7 @@ const saveActivity = (request, response) => {
         description,
         date,
     });
-    
+
     act.save((err) => {
         if (err) {
             response.status(400).send(err);
@@ -58,8 +58,10 @@ const updateActivity = (request, response) => {
     });
 };
 
-module.exports.saveActivity = saveActivity;
-module.exports.getActivities = getActivities;
-module.exports.getActivity = getActivity;
-module.exports.deleteActivity = deleteActivity;
-module.exports.updateActivity = updateActivity;
+module.exports = {
+    saveActivity,
+    getActivities,
+    getActivity,
+    deleteActivity,
+    updateActivity,
+};
