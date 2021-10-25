@@ -54,7 +54,7 @@ const updateUser = (request, response) => {
         if (err) {
             response.status(400).send(err);
         } else {
-            response.status(200).send(usr);
+            response.status(200).json(usr);
         }
     });
 };

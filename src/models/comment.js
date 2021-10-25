@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
- 
+
 const commentSchema = new mongoose.Schema(
     {
         username: { type: String, required: true },
-        message: {typo: String, requires: true}
+        message: { type: String, required: true },
     },
     { collection: 'comment', versionKey: false }
 );
