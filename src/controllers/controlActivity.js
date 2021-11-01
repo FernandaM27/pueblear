@@ -1,6 +1,8 @@
 const { activity } = require('../models/activity');
+const activityValidation = require('../utils/validations/activityValidations');
 
 const saveActivity = (request, response) => {
+    activityValidation(request.body);
     const { name, price, description, date } = request.body;
     const act = new activity({
         name,
@@ -11,29 +13,47 @@ const saveActivity = (request, response) => {
 
     act.save((err) => {
         if (err) {
-            response.status(400).send(err);
+            response.status(400).json({
+                status: 'error',
+                error: err,
+            });
         } else {
-            response.status(201).send(act);
+            response.status(201).json({
+                status: 'success',
+                act,
+            });
         }
     });
 };
 
 const getActivities = (request, response) => {
-    const activities = activity.find((err, activities) => {
+    activity.find((err, activities) => {
         if (err) {
-            response.status(400).send(err);
+            response.status(400).json({
+                status: 'error',
+                error: err,
+            });
         } else {
-            response.status(200).send(activities);
+            response.status(200).json({
+                status: 'success',
+                activities,
+            });
         }
     });
 };
 
 const getActivity = (request, response) => {
-    const act = activity.findById(request.params.id, (err, act) => {
+    activity.findById(request.params.id, (err, act) => {
         if (err) {
-            response.status(400).send(err);
+            response.status(400).json({
+                status: 'error',
+                error: err,
+            });
         } else {
-            response.status(200).send(act);
+            response.status(200).json({
+                status: 'success',
+                act,
+            });
         }
     });
 };
@@ -41,19 +61,32 @@ const getActivity = (request, response) => {
 const deleteActivity = (request, response) => {
     activity.deleteOne({ _id: request.params.id }, (err) => {
         if (err) {
-            response.status(400).send(err);
+            response.status(400).json({
+                status: 'error',
+                error: err,
+            });
         } else {
-            response.status(200).send('Deleted');
+            response.status(200).json({
+                status: 'success',
+                message: 'Activity deleted',
+            });
         }
     });
 };
 
 const updateActivity = (request, response) => {
+    activityValidation(request.body);
     activity.findByIdAndUpdate(request.params.id, request.body, (err, act) => {
         if (err) {
-            response.status(400).send(err);
+            response.status(400).json({
+                status: 'error',
+                error: err,
+            });
         } else {
-            response.status(200).send(act);
+            response.status(200).json({
+                status: 'success',
+                act,
+            });
         }
     });
 };

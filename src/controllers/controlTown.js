@@ -1,6 +1,8 @@
 const { town } = require('../models/town');
+const townValidation = require('../utils/validations/townValidations')
 
 const saveTown = (request, response) => {
+    townValidation(request.body);
     const { name, state, location, attractions, hotels, travels, comments } =
         request.body;
     const twn = new town({
@@ -15,9 +17,15 @@ const saveTown = (request, response) => {
 
     town.save((err) => {
         if (err) {
-            response.status(400).send(err);
+            response.status(400).json({
+                status: 'error',
+                error: err,
+            });
         } else {
-            response.status(201).send(twn);
+            response.status(201).json({
+                status: 'success',
+                twn,
+            });
         }
     });
 };
@@ -25,9 +33,15 @@ const saveTown = (request, response) => {
 const getTowns = (request, response) => {
     const towns = town.find((err, towns) => {
         if (err) {
-            response.status(400).send(err);
+            response.status(400).json({
+                status: 'error',
+                error: err,
+            });
         } else {
-            response.status(200).send(towns);
+            response.status(200).json({
+                status: 'success',
+                twons,
+            });
         }
     });
 };
@@ -35,9 +49,15 @@ const getTowns = (request, response) => {
 const getTown = (request, response) => {
     const twn = town.findById(request.params.id, (err, twn) => {
         if (err) {
-            response.status(400).send(err);
+            response.status(400).json({
+                status: 'error',
+                error: err,
+            });
         } else {
-            response.status(200).send(twn);
+            response.status(200).json({
+                status: 'success',
+                twn,
+            });
         }
     });
 };
@@ -45,19 +65,32 @@ const getTown = (request, response) => {
 const deleteTown = (request, response) => {
     town.deleteOne({ _id: request.params.id }, (err) => {
         if (err) {
-            response.status(400).send(err);
+            response.status(400).json({
+                status: 'error',
+                error: err,
+            });
         } else {
-            response.status(200).send('Deleted');
+            response.status(200).json({
+                status: 'success',
+                message: 'Town deleted',
+            });
         }
     });
 };
 
 const updateTown = (request, response) => {
+    townValidation(request.body)
     town.findByIdAndUpdate(request.params.id, request.body, (err, twn) => {
         if (err) {
-            response.status(400).send(err);
+            response.status(400).json({
+                status: 'error',
+                error: err,
+            });
         } else {
-            response.status(200).send(twn);
+            response.status(200).json({
+                status: 'success',
+                twn,
+            });
         }
     });
 };

@@ -1,6 +1,8 @@
 const { travel } = require('../models/travel');
+const travelValidation = require('../utils/validations/travelsValidations');
 
 const saveTravel = (request, response) => {
+    travelValidation(request.body);
     const { date, price, transportation } = request.body;
     const trvl = new travel({
         date,
@@ -8,31 +10,49 @@ const saveTravel = (request, response) => {
         transportation,
     });
 
-    travel.save((err) => {
+    trvl.save((err) => {
         if (err) {
-            response.status(400).send(err);
+            response.status(400).json({
+                status: 'error',
+                err,
+            });
         } else {
-            response.status(201).send(trvl);
+            response.status(201).json({
+                status: 'success',
+                trvl,
+            });
         }
     });
 };
 
 const getTravels = (request, response) => {
-    const travels = travel.find((err, travel) => {
+    travel.find((err, travels) => {
         if (err) {
-            response.status(400).send(err);
+            response.status(400).json({
+                status: 'error',
+                err,
+            });
         } else {
-            response.status(200).send(travels);
+            response.status(200).json({
+                status: 'success',
+                travels,
+            });
         }
     });
 };
 
 const getTravel = (request, response) => {
-    const trvl = travel.findById(request.params.id, (err, trvl) => {
+    travel.findById(request.params.id, (err, trvl) => {
         if (err) {
-            response.status(400).send(err);
+            response.status(400).json({
+                status: 'error',
+                err,
+            });
         } else {
-            response.status(200).send(trvl);
+            response.status(200).json({
+                status: 'success',
+                trvl,
+            });
         }
     });
 };
@@ -40,19 +60,32 @@ const getTravel = (request, response) => {
 const deleteTravel = (request, response) => {
     travel.deleteOne({ _id: request.params.id }, (err) => {
         if (err) {
-            response.status(400).send(err);
+            response.status(400).json({
+                status: 'error',
+                err,
+            });
         } else {
-            response.status(200).send('Deleted');
+            response.status(200).json({
+                status: 'success',
+                message: 'Travel deleted',
+            });
         }
     });
 };
 
 const updateTravel = (request, response) => {
+    travelValidation(request.body);
     travel.findByIdAndUpdate(request.params.id, request.body, (err, trvl) => {
         if (err) {
-            response.status(400).send(err);
+            response.status(400).json({
+                status: 'error',
+                error: err,
+            });
         } else {
-            response.status(200).send(trvl);
+            response.status(200).json({
+                status: 'success',
+                trvl,
+            });
         }
     });
 };

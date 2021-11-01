@@ -1,6 +1,9 @@
 const { hotel } = require('../models/hotel');
+const hotelValidation = require('../utils/validations/hotelValidations');
 
 const saveHotel = (request, response) => {
+    hotelValidation(request.body);
+
     const { name, price, location, rating } = request.body;
     const ht = new hotel({
         name,
@@ -11,29 +14,47 @@ const saveHotel = (request, response) => {
 
     ht.save((err) => {
         if (err) {
-            response.status(400).send(err);
+            response.status(400).json({
+                status: 'error',
+                error: err,
+            });
         } else {
-            response.status(201).send(ht);
+            response.status(201).json({
+                status: 'success',
+                ht,
+            });
         }
     });
 };
 
 const getHotels = (request, response) => {
-    const hotels = hotel.find((err, hotels) => {
+    hotel.find((err, hotels) => {
         if (err) {
-            response.status(400).send(err);
+            response.status(400).json({
+                status: 'error',
+                error: err,
+            });
         } else {
-            response.status(200).send(hotels);
+            response.status(200).json({
+                status: 'success',
+                hotels,
+            });
         }
     });
 };
 
 const getHotel = (request, response) => {
-    const ht = hotel.findById(request.params.id, (err, ht) => {
+    hotel.findById(request.params.id, (err, hotel) => {
         if (err) {
-            response.status(400).send(err);
+            response.status(400).json({
+                success: 'error',
+                error: err,
+            });
         } else {
-            response.status(200).send(ht);
+            response.status(200).json({
+                status: 'success',
+                hotel,
+            });
         }
     });
 };
@@ -41,23 +62,32 @@ const getHotel = (request, response) => {
 const deleteHotel = (request, response) => {
     hotel.deleteOne({ _id: request.params.id }, (err) => {
         if (err) {
-            response.status(400).send(err);
+            response.status(400).json({
+                status: 'error',
+                error: err,
+            });
         } else {
-            response.status(200).send('Deleted');
+            response.status(200).json({
+                status: 'success',
+                message: 'Hotel deleted',
+            });
         }
     });
 };
 
 const updateHotel = (request, response) => {
-    hotel.findByIdAndUpdate(request.params.id, request.body, (err, htl) => {
-        if (err) {
-            response.status(400).send(err);
-        } else {
-            response.status(200).send(htl);
-        }
-    });
+    hotelValidation(request.body);
+    if (err) {
+        response.status(400).json({
+            status: 'error',
+            error: err,
+        });
+    } else {
+        response.status(200).json({
+            status: 'success',
+            hotel,
+        });
+    }
 };
 
-
-module.exports = {  saveHotel, getHotels, getHotel, deleteHotel, updateHotel };
-
+module.exports = { saveHotel, getHotels, getHotel, deleteHotel, updateHotel };
