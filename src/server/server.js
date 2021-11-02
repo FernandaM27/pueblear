@@ -17,6 +17,6 @@ app.all('*', (req, resp, next) => {
     );
 });
 
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 
 module.exports = app;

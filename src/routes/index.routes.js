@@ -8,7 +8,7 @@ const { town } = require('./town.routes');
 const { user } = require('./user.routes');
 const { attraction } = require('./attraction.routes');
 const { comment } = require('./comments.routes');
-
+const auth = require('./userAuth.routes');
 
 router.use('/', activity);
 router.use('/', hotel);
@@ -17,5 +17,8 @@ router.use('/', transportation);
 router.use('/', town);
 router.use('/', user);
 router.use('/', attraction);
+router.use('/', comment);
+router.use('/', auth);
+
 
 module.exports = router;

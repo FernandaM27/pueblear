@@ -1,6 +1,7 @@
 const { user } = require('../models/user');
 const userValidation = require('../utils/validations/userValidations');
 
+
 const saveUser = (request, response) => {
     userValidation(request.body);
     const { name, age, location, travels, password } = request.body;
@@ -26,6 +27,7 @@ const saveUser = (request, response) => {
 };
 
 const getUsers = (request, response) => {
+
     const users = user.find((err, users) => {
         if (err) {
             response.status(400).json({
