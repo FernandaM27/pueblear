@@ -4,9 +4,8 @@ const getUserDataAuth = require('../utils/auth/getUserDataAuth');
 const router = express.Router();
 const userAuthentication = require('../utils/auth/userAuthentication');
 
-router.get('/logIn', (req, res) => {
-    const { name, password } = req.body;
-
+router.post('/logIn', (req, res) => {
+    const { name, password } = req.body
     userAuthentication(name, password)
         .then((user) => {
             user = getUserDataAuth(user);

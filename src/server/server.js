@@ -7,7 +7,7 @@ const app = express();
 app.set('port', 3000);
 app.use(express.json());
 
-app.use( cors({ origin: '*' }));
+app.use( cors( '*' ));
 app.use('/', router);
 
 app.all('*', (req, resp, next) => {
