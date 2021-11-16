@@ -36,23 +36,27 @@
               Crear cuenta
               <span class="underline"></span>
             </button>
-            <form class="form form-signup">
+            <form class="form form-signup" id="form-signup">
               <fieldset>
                 <legend>Ingrese su correo y contraseña</legend>
                 <div class="input-block">
-                  <label for="signup-email">Correo</label>
-                  <input id="signup-email" type="email" required>
+                  <label for="signup-email">Usuario</label>
+                  <input id="signup-email" type="text" required>
                 </div>
                 <div class="input-block">
                   <label for="signup-password">Contraseña</label>
                   <input id="signup-password" type="password" required>
                 </div>
                 <div class="input-block">
-                  <label for="signup-password-confirm">Confirmar constraseña</label>
-                  <input id="signup-password-confirm" type="password" required>
+                  <label for="edad">Edad</label>
+                  <input id="age" type="number" min=0 max=100 required>
+                </div>
+                <div class="input-block">
+                  <label for="location">Dirección</label>
+                  <input id="location" type="text" required>
                 </div>
               </fieldset>
-              <button type="submit" class="btn-signup">Registrar</button>
+              <button type="submit" class="btn-signup" id="btn-signup">Registrar</button>
             </form>
           </div>
         </div>
