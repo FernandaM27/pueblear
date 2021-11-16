@@ -6,6 +6,7 @@ const townSchema = new Schema(
         name: { type: String, required: true },
         state: { type: String, required: true },
         location: { type: String, required: true },
+        description: { type: String, required: false },
         hotels: { type: Schema.Types.Array, required: false },
         attractions: { type: Schema.Types.Array, required: false },
         travels: { type: Schema.Types.Array, required: false },

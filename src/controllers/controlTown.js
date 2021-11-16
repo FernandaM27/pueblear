@@ -3,17 +3,7 @@ const townValidation = require('../utils/validations/townValidations')
 
 const saveTown = (request, response) => {
     townValidation(request.body);
-    const { name, state, location, attractions, hotels, travels, comments } =
-        request.body;
-    const twn = new town({
-        name,
-        state,
-        location,
-        attractions,
-        hotels,
-        travels,
-        comments,
-    });
+    const twn = new town({ ...request.body });
 
     town.save((err) => {
         if (err) {
