@@ -40,7 +40,7 @@ const getTowns = (request, response) => {
         } else {
             response.status(200).json({
                 status: 'success',
-                twons,
+                towns,
             });
         }
     });
